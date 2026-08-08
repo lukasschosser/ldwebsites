@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LD Websites — Webseiten, die im Gedächtnis bleiben</title>
+<meta name="description" content="LD Websites gestaltet Webseiten für Unternehmen, die Wert auf Qualität und persönliche Zusammenarbeit legen." />
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          base: '#FAFAF9',
+          panel: '#FFFFFF',
+          panel2: '#F4F4F5',
+          line: '#E4E4E7',
+          ink: {
+            DEFAULT: '#18181B',
+            soft: '#3F3F46',
+            muted: '#52525B',
+          },
+          violet: {
+            DEFAULT: '#7C3AED',
+            deep: '#6D28D9',
+            soft: '#8B5CF6',
+          },
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  html { background: #FAFAF9; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAFAF9;
+    color: #18181B;
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+  .mesh-glow {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .mesh-glow::before,
+  .mesh-glow::after {
+    content: '';
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(100px);
+    opacity: 0.22;
+  }
+  .mesh-glow::before {
+    width: 620px; height: 620px;
+    background: radial-gradient(circle at center, #7C3AED 0%, transparent 70%);
+    top: -220px; left: -140px;
+    animation: drift1 18s ease-in-out infinite alternate;
+  }
+  .mesh-glow::after {
+    width: 520px; height: 520px;
+    background: radial-gradient(circle at center, #8B5CF6 0%, transparent 70%);
+    bottom: -220px; right: -120px;
+    animation: drift2 20s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 30px) scale(1.08); }
+  }
+  @keyframes drift2 {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-40px, -25px) scale(1.05); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .load-in { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .load-in:nth-child(1) { animation-delay: 0.05s; }
+  .load-in:nth-child(2) { animation-delay: 0.15s; }
+  .load-in:nth-child(3) { animation-delay: 0.25s; }
+  .load-in:nth-child(4) { animation-delay: 0.35s; }
+  .load-in:nth-child(5) { animation-delay: 0.45s; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mesh-glow::before, .mesh-glow::after { animation: none; }
+    .load-in { animation: none; opacity: 1; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    * { scroll-behavior: auto !important; }
+  }
+
+  .grid-overlay {
+    background-image:
+      linear-gradient(to right, rgba(24,24,27,0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(24,24,27,0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+
+  .glow-btn {
+    box-shadow: 0 1px 2px rgba(24,24,27,0.06);
+    transition: box-shadow 0.3s ease, transform 0.15s ease, background 0.3s ease;
+  }
+  .glow-btn:hover {
+    box-shadow: 0 12px 28px -8px rgba(124, 58, 237, 0.45);
+  }
+
+  .magnetic { transition: transform 0.2s ease-out; will-change: transform; }
+
+  .card-hover {
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    border-color: rgba(124, 58, 237, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -16px rgba(24,24,27,0.14);
+  }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #7C3AED;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  .field {
+    background: #FFFFFF;
+    border: 1px solid #E4E4E7;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .field:focus {
+    outline: none;
+    border-color: #7C3AED;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+  }
+
+  ::selection { background: #7C3AED; color: white; }
+
+  .tag { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.02em; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #7C3AED;
+    outline-offset: 3px;
+  }
+
+  .gauge-ring { stroke-dasharray: 238.76; stroke-dashoffset: 238.76; }
+  #scanBar { width: 0%; }
+</style>
+</head>
+
+<body class="antialiased">
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#6D28D9" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/80 border-b border-line">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+    <a href="#" class="font-display text-lg tracking-tight text-ink flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-violet"></span>
+      LD Websites
+    </a>
+
+    <nav class="hidden md:flex items-center gap-9 text-sm text-ink-muted font-body">
+      <a href="#leistungen" class="nav-link hover:text-ink transition-colors">Leistungen</a>
+      <a href="#portfolio" class="nav-link hover:text-ink transition-colors">Portfolio</a>
+      <a href="#team" class="nav-link hover:text-ink transition-colors">Team</a>
+      <a href="#kontakt" class="nav-link hover:text-ink transition-colors">Kontakt</a>
+    </nav>
+
+    <a href="#kontakt"
+       class="glow-btn magnetic hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white">
+      Projekt starten
+    </a>
+
+    <button id="menuBtn" class="md:hidden text-ink" aria-label="Menü öffnen" aria-expanded="false">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden border-t border-line bg-white/95 backdrop-blur-md">
+    <div class="px-6 py-5 flex flex-col gap-4 text-ink-soft text-base">
+      <a href="#leistungen" class="mobile-link">Leistungen</a>
+      <a href="#portfolio" class="mobile-link">Portfolio</a>
+      <a href="#team" class="mobile-link">Team</a>
+      <a href="#kontakt" class="mobile-link">Kontakt</a>
+      <a href="#kontakt" class="mt-2 text-center px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white font-medium">
+        Projekt starten
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative pt-40 pb-24 md:pt-48 md:pb-32 px-6 overflow-hidden">
+  <div class="mesh-glow"></div>
+  <div class="absolute inset-0 grid-overlay"></div>
+
+  <div class="relative max-w-4xl mx-auto text-center">
+    <span class="tag load-in inline-block text-xs uppercase tracking-[0.2em] text-violet-deep border border-violet/30 bg-violet/5 rounded-full px-4 py-1.5 mb-8">
+      Kostenloser Website-Check
+    </span>
+
+    <h1 class="load-in font-display text-4xl sm:text-5xl md:text-7xl font-medium leading-[1.08] tracking-tight text-ink">
+      Wir gestalten Webseiten,
+      <br class="hidden sm:block" />
+      die im <span class="bg-gradient-to-r from-violet-soft to-violet-deep bg-clip-text text-transparent">Gedächtnis</span> bleiben
+    </h1>
+
+    <p class="load-in mt-7 text-lg text-ink-muted max-w-xl mx-auto leading-relaxed">
+      Wir sind Lukas und Dominik. Zwei Ansprechpartner, ein direkter Draht — von
+      der ersten Idee bis zur fertigen Seite arbeiten Sie mit uns persönlich zusammen,
+      nicht mit einem anonymen Team.
+    </p>
+
+    <!-- Trust-Leiste -->
+    <div class="load-in mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-ink-muted">
+      <span class="inline-flex items-center gap-2">
+        <i data-lucide="clock" class="w-4 h-4 text-violet"></i>
+        Antwort innerhalb 48h
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <i data-lucide="user-check" class="w-4 h-4 text-violet"></i>
+        Direkter Ansprechpartner
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <i data-lucide="badge-check" class="w-4 h-4 text-violet"></i>
+        Faire, transparente Preise
+      </span>
+    </div>
+
+    <!-- ===== Signature-Element: Live Website-Check ===== -->
+    <div class="load-in mt-12 max-w-xl mx-auto">
+      <form id="checkForm" class="flex flex-col sm:flex-row gap-3 sm:gap-0">
+        <input id="checkUrl" type="text" placeholder="ihre-website.at"
+               class="field flex-1 rounded-full sm:rounded-r-none px-6 py-4 text-base text-ink placeholder-ink-muted/60" />
+        <button type="submit"
+                class="glow-btn magnetic rounded-full sm:rounded-l-none px-7 py-4 bg-gradient-to-r from-violet-soft to-violet-deep text-white text-sm font-medium inline-flex items-center justify-center gap-2">
+          Jetzt prüfen
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+      </form>
+      <p class="text-sm text-ink-muted mt-3">Kostenlos & unverbindlich — Ergebnis in Sekunden</p>
+
+      <!-- Scanning state -->
+      <div id="scanState" class="hidden mt-9">
+        <div class="flex items-center justify-center gap-2.5 text-sm text-ink-muted mb-3">
+          <span class="w-2 h-2 rounded-full bg-violet animate-pulse"></span>
+          <span id="scanLabel">Analysiere ...</span>
+        </div>
+        <div class="h-1.5 w-full rounded-full bg-panel2 overflow-hidden">
+          <div id="scanBar" class="h-full bg-gradient-to-r from-violet-soft to-violet-deep rounded-full"></div>
+        </div>
+      </div>
+
+      <!-- Result state -->
+      <div id="resultState" class="hidden mt-10 text-left">
+        <div class="grid grid-cols-3 gap-4 sm:gap-8">
+          <div class="text-center" data-gauge="perf">
+            <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+              <svg class="-rotate-90 w-full h-full" viewBox="0 0 88 88">
+                <circle cx="44" cy="44" r="38" fill="none" stroke="#E4E4E7" stroke-width="7" />
+                <circle class="gauge-ring" cx="44" cy="44" r="38" fill="none" stroke="url(#gaugeGrad)" stroke-width="7" stroke-linecap="round" />
+              </svg>
+              <div class="gauge-value absolute inset-0 flex items-center justify-center font-display text-lg text-ink">0</div>
+            </div>
+            <p class="text-sm text-ink-muted mt-3">Performance</p>
+          </div>
+          <div class="text-center" data-gauge="design">
+            <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+              <svg class="-rotate-90 w-full h-full" viewBox="0 0 88 88">
+                <circle cx="44" cy="44" r="38" fill="none" stroke="#E4E4E7" stroke-width="7" />
+                <circle class="gauge-ring" cx="44" cy="44" r="38" fill="none" stroke="url(#gaugeGrad)" stroke-width="7" stroke-linecap="round" />
+              </svg>
+              <div class="gauge-value absolute inset-0 flex items-center justify-center font-display text-lg text-ink">0</div>
+            </div>
+            <p class="text-sm text-ink-muted mt-3">Design</p>
+          </div>
+          <div class="text-center" data-gauge="mobile">
+            <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+              <svg class="-rotate-90 w-full h-full" viewBox="0 0 88 88">
+                <circle cx="44" cy="44" r="38" fill="none" stroke="#E4E4E7" stroke-width="7" />
+                <circle class="gauge-ring" cx="44" cy="44" r="38" fill="none" stroke="url(#gaugeGrad)" stroke-width="7" stroke-linecap="round" />
+              </svg>
+              <div class="gauge-value absolute inset-0 flex items-center justify-center font-display text-lg text-ink">0</div>
+            </div>
+            <p class="text-sm text-ink-muted mt-3">Mobile</p>
+          </div>
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-violet/20 bg-violet/5 p-6 text-center">
+          <p class="text-base text-ink-soft leading-relaxed">
+            <span id="resultDomain" class="text-ink font-semibold"></span> hat noch Potenzial.
+            In einem kurzen Gespräch zeigen wir Ihnen genau, wo.
+          </p>
+          <a href="#kontakt" class="glow-btn magnetic mt-5 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white text-sm font-medium">
+            Kostenloses Gespräch vereinbaren
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="load-in mt-8">
+      <a href="#portfolio"
+         class="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-ink transition-colors px-2 py-2">
+        oder Arbeiten ansehen
+        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section id="leistungen" class="relative py-24 md:py-32 px-6 border-t border-line">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal max-w-xl mb-16">
+      <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Leistungen</span>
+      <h2 class="font-display text-3xl md:text-4xl font-medium text-ink mt-4">
+        Alles aus einer Hand
+      </h2>
+      <p class="mt-4 text-lg text-ink-muted leading-relaxed">
+        Von der ersten Skizze bis zur letzten Zeile Code — wir begleiten Ihr Projekt
+        persönlich durch jede Phase.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <div class="reveal card-hover group rounded-2xl border border-line bg-panel p-7">
+        <div class="w-11 h-11 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center mb-6 group-hover:bg-violet/20 transition-colors">
+          <i data-lucide="layout-template" class="w-5 h-5 text-violet-deep"></i>
+        </div>
+        <h3 class="font-display text-lg text-ink mb-2">Webdesign</h3>
+        <p class="text-base text-ink-muted leading-relaxed">
+          Maßgeschneiderte Designs, die Ihr Unternehmen klar und unverwechselbar zeigen.
+        </p>
+      </div>
+
+      <div class="reveal card-hover group rounded-2xl border border-line bg-panel p-7" style="transition-delay:0.08s">
+        <div class="w-11 h-11 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center mb-6 group-hover:bg-violet/20 transition-colors">
+          <i data-lucide="mouse-pointer-click" class="w-5 h-5 text-violet-deep"></i>
+        </div>
+        <h3 class="font-display text-lg text-ink mb-2">UI/UX Design</h3>
+        <p class="text-base text-ink-muted leading-relaxed">
+          Durchdachte Nutzerführung, die aus Besuchern Kunden macht.
+        </p>
+      </div>
+
+      <div class="reveal card-hover group rounded-2xl border border-line bg-panel p-7" style="transition-delay:0.16s">
+        <div class="w-11 h-11 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center mb-6 group-hover:bg-violet/20 transition-colors">
+          <i data-lucide="refresh-cw" class="w-5 h-5 text-violet-deep"></i>
+        </div>
+        <h3 class="font-display text-lg text-ink mb-2">Redesign</h3>
+        <p class="text-base text-ink-muted leading-relaxed">
+          Bestehende Seiten modernisieren — ohne bei null anzufangen.
+        </p>
+      </div>
+
+      <div class="reveal card-hover group rounded-2xl border border-line bg-panel p-7" style="transition-delay:0.24s">
+        <div class="w-11 h-11 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center mb-6 group-hover:bg-violet/20 transition-colors">
+          <i data-lucide="gauge" class="w-5 h-5 text-violet-deep"></i>
+        </div>
+        <h3 class="font-display text-lg text-ink mb-2">Performance</h3>
+        <p class="text-base text-ink-muted leading-relaxed">
+          Schnelle Ladezeiten und saubere Technik für bessere Rankings.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section id="portfolio" class="relative py-24 md:py-32 px-6 border-t border-line">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal max-w-xl mb-16">
+      <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Portfolio</span>
+      <h2 class="font-display text-3xl md:text-4xl font-medium text-ink mt-4">
+        Ausgewählte Projekte
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-6">
+
+      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block">
+        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
+          <i data-lucide="shopping-bag" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-lg text-ink">Nordkorn Studio</h3>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
+          </div>
+          <div class="flex gap-2">
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">E-Commerce</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Branding</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.08s">
+        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
+          <i data-lucide="building-2" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-lg text-ink">Ferro & Bank</h3>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
+          </div>
+          <div class="flex gap-2">
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Corporate</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Redesign</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.16s">
+        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
+          <i data-lucide="utensils" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-lg text-ink">Lumen Kitchen</h3>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
+          </div>
+          <div class="flex gap-2">
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Gastronomie</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">UI/UX</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.24s">
+        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
+          <i data-lucide="stethoscope" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-lg text-ink">Praxis Amsel</h3>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
+          </div>
+          <div class="flex gap-2">
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Healthcare</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Webdesign</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFERENZ / VERTRAUEN ============ -->
+<section class="relative py-20 px-6 border-t border-line bg-panel2">
+  <div class="reveal max-w-3xl mx-auto text-center">
+    <i data-lucide="quote" class="w-8 h-8 text-violet/40 mx-auto mb-6"></i>
+    <p class="font-display text-xl md:text-2xl text-ink leading-snug">
+      „Endlich jemand, der uns wirklich zugehört hat. Klare Kommunikation,
+      faire Preise, und die neue Seite bringt spürbar mehr Anfragen."
+    </p>
+    <p class="mt-5 text-sm text-ink-muted">Geschäftsführerin, lokales Handwerksunternehmen</p>
+  </div>
+</section>
+
+<!-- ============ TEAM / ÜBER UNS ============ -->
+<section id="team" class="relative py-24 md:py-32 px-6 border-t border-line overflow-hidden">
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div class="w-[500px] h-[500px] rounded-full bg-violet/5 blur-[120px]"></div>
+  </div>
+
+  <div class="reveal relative max-w-3xl mx-auto text-center mb-16">
+    <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Wer wir sind</span>
+    <h2 class="font-display text-3xl md:text-4xl font-medium text-ink mt-4 leading-snug">
+      Kein Team-Chart, zwei Namen
+    </h2>
+    <p class="mt-6 text-lg text-ink-muted leading-relaxed">
+      Wenn Sie mit uns arbeiten, wissen Sie genau, mit wem Sie sprechen. Keine
+      Weiterleitung an anonyme Sachbearbeiter, keine endlosen Abstimmungsrunden.
+      Wir prüfen jedes Detail persönlich und stehen mit unserem Namen für das
+      Ergebnis gerade.
+    </p>
+  </div>
+
+  <div class="relative max-w-2xl mx-auto grid sm:grid-cols-2 gap-6">
+    <div class="reveal card-hover rounded-2xl border border-line bg-panel p-7 text-center">
+      <div class="w-24 h-24 mx-auto rounded-full bg-panel2 border border-line flex items-center justify-center mb-5">
+        <i data-lucide="user" class="w-9 h-9 text-zinc-400"></i>
+      </div>
+      <h3 class="font-display text-lg text-ink">Lukas</h3>
+      <p class="text-sm text-violet-deep mt-1 mb-3">Design & Konzept</p>
+      <p class="text-base text-ink-muted leading-relaxed">
+        Verantwortet Gestaltung und Nutzerführung — von der ersten Skizze bis zum
+        letzten Detail.
+      </p>
+    </div>
+
+    <div class="reveal card-hover rounded-2xl border border-line bg-panel p-7 text-center" style="transition-delay:0.1s">
+      <div class="w-24 h-24 mx-auto rounded-full bg-panel2 border border-line flex items-center justify-center mb-5">
+        <i data-lucide="user" class="w-9 h-9 text-zinc-400"></i>
+      </div>
+      <h3 class="font-display text-lg text-ink">Dominik</h3>
+      <p class="text-sm text-violet-deep mt-1 mb-3">Entwicklung & Technik</p>
+      <p class="text-base text-ink-muted leading-relaxed">
+        Sorgt für sauberen Code, schnelle Ladezeiten und eine Seite, die zuverlässig
+        läuft.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt" class="relative py-24 md:py-32 px-6 border-t border-line">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 md:gap-10">
+
+    <div class="reveal">
+      <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Kontakt</span>
+      <h2 class="font-display text-3xl md:text-4xl font-medium text-ink mt-4 leading-snug">
+        Lassen Sie uns Ihr Projekt besprechen
+      </h2>
+      <p class="mt-5 text-lg text-ink-muted leading-relaxed">
+        Schreiben Sie uns kurz, worum es geht. Sie bekommen innerhalb von zwei
+        Werktagen eine ehrliche Einschätzung — persönlich von Lukas oder Dominik.
+      </p>
+
+      <div class="mt-10 space-y-4">
+        <a href="mailto:hallo@ld-websites.at" class="flex items-center gap-3 text-base text-ink-soft hover:text-ink transition-colors">
+          <span class="w-9 h-9 rounded-full bg-panel2 border border-line flex items-center justify-center">
+            <i data-lucide="mail" class="w-4 h-4 text-violet-deep"></i>
+          </span>
+          hallo@ld-websites.at
+        </a>
+        <a href="#" class="flex items-center gap-3 text-base text-ink-soft hover:text-ink transition-colors">
+          <span class="w-9 h-9 rounded-full bg-panel2 border border-line flex items-center justify-center">
+            <i data-lucide="instagram" class="w-4 h-4 text-violet-deep"></i>
+          </span>
+          @ldwebsites
+        </a>
+      </div>
+    </div>
+
+    <form id="contactForm" class="reveal space-y-4" style="transition-delay:0.1s">
+      <div>
+        <label for="name" class="block text-sm text-ink-muted mb-2">Name</label>
+        <input id="name" name="name" type="text" required
+               class="field w-full rounded-xl px-4 py-3 text-base text-ink placeholder-ink-muted/50"
+               placeholder="Ihr Name" />
+      </div>
+      <div>
+        <label for="email" class="block text-sm text-ink-muted mb-2">E-Mail</label>
+        <input id="email" name="email" type="email" required
+               class="field w-full rounded-xl px-4 py-3 text-base text-ink placeholder-ink-muted/50"
+               placeholder="ihre@email.at" />
+      </div>
+      <div>
+        <label for="message" class="block text-sm text-ink-muted mb-2">Nachricht</label>
+        <textarea id="message" name="message" rows="4" required
+                  class="field w-full rounded-xl px-4 py-3 text-base text-ink placeholder-ink-muted/50 resize-none"
+                  placeholder="Erzählen Sie uns von Ihrem Projekt..."></textarea>
+      </div>
+      <button type="submit"
+              class="glow-btn magnetic w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-soft to-violet-deep text-white font-medium text-base">
+        Nachricht senden
+        <i data-lucide="send" class="w-4 h-4"></i>
+      </button>
+      <p id="formSuccess" class="hidden text-sm text-violet-deep text-center pt-1">
+        Danke! Wir melden uns in Kürze.
+      </p>
+    </form>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-line px-6 py-10">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="font-display text-sm text-ink-muted">
+      © <span id="year"></span> LD Websites. Alle Rechte vorbehalten.
+    </div>
+
+    <div class="flex items-center gap-6 text-sm text-ink-muted">
+      <a href="#" class="hover:text-ink transition-colors">Impressum</a>
+      <a href="#" class="hover:text-ink transition-colors">Datenschutz</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="#" aria-label="Instagram" class="text-ink-muted hover:text-violet-deep transition-colors">
+        <i data-lucide="instagram" class="w-4 h-4"></i>
+      </a>
+      <a href="#" aria-label="LinkedIn" class="text-ink-muted hover:text-violet-deep transition-colors">
+        <i data-lucide="linkedin" class="w-4 h-4"></i>
+      </a>
+      <a href="#" aria-label="Dribbble" class="text-ink-muted hover:text-violet-deep transition-colors">
+        <i data-lucide="dribbble" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+    menuBtn.innerHTML = isHidden
+      ? '<i data-lucide="x" class="w-6 h-6"></i>'
+      : '<i data-lucide="menu" class="w-6 h-6"></i>';
+    lucide.createIcons();
+  });
+
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+      lucide.createIcons();
+    });
+  });
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.14}px, ${y * 0.2}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ===== Signature-Element: Live Website-Check ===== */
+  const CIRC = 2 * Math.PI * 38;
+  const checkForm = document.getElementById('checkForm');
+  const checkUrl = document.getElementById('checkUrl');
+  const scanState = document.getElementById('scanState');
+  const resultState = document.getElementById('resultState');
+  const scanBar = document.getElementById('scanBar');
+  const scanLabel = document.getElementById('scanLabel');
+  const resultDomain = document.getElementById('resultDomain');
+
+  function animateGauge(circle, valueEl, targetScore, duration) {
+    const start = performance.now();
+    function frame(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = Math.round(eased * targetScore);
+      valueEl.textContent = current;
+      circle.style.strokeDashoffset = String(CIRC - (CIRC * (current / 100)));
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Zeigt die Ergebnis-Scores an (echte Werte vom Server, oder Fallback bei Fehlern)
+  function showResult(domain, scoresObj) {
+    scanState.classList.add('hidden');
+    resultState.classList.remove('hidden');
+    resultDomain.textContent = domain;
+
+    Object.keys(scoresObj).forEach((key, i) => {
+      const wrap = document.querySelector('[data-gauge="' + key + '"]');
+      if (!wrap) return;
+      const circle = wrap.querySelector('.gauge-ring');
+      const valueEl = wrap.querySelector('.gauge-value');
+      circle.style.strokeDashoffset = String(CIRC);
+      setTimeout(() => animateGauge(circle, valueEl, scoresObj[key], 1100), i * 150);
+    });
+  }
+
+  if (checkForm) {
+    checkForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const raw = checkUrl.value.trim();
+      const domain = raw || 'ihre-website.at';
+
+      resultState.classList.add('hidden');
+      scanState.classList.remove('hidden');
+      scanLabel.textContent = 'Analysiere ' + domain + ' ...';
+      scanBar.style.transition = 'none';
+      scanBar.style.width = '0%';
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scanBar.style.transition = 'width 1.7s cubic-bezier(0.4,0,0.2,1)';
+          scanBar.style.width = '100%';
+        });
+      });
+
+      // Ruft die echte Serverless Function auf (siehe /api/website-check.js).
+      // Läuft die Seite ohne Backend (z. B. lokale Vorschau), springt der catch-Block
+      // auf eine Simulation zurück, damit die Seite trotzdem nie kaputt aussieht.
+      const minWait = new Promise(resolve => setTimeout(resolve, 1800));
+      const fetchResult = fetch('/api/website-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domain }),
+      }).then(r => r.json());
+
+      try {
+        const [, data] = await Promise.all([minWait, fetchResult]);
+        if (data.error) throw new Error(data.error);
+        showResult(data.domain || domain, {
+          perf: data.performanceScore,
+          design: data.designScore,
+          mobile: data.mobileScore,
+        });
+      } catch (err) {
+        await minWait;
+        // Fallback-Simulation, falls kein Backend erreichbar ist
+        showResult(domain, {
+          perf: 34 + Math.floor(Math.random() * 26),
+          design: 40 + Math.floor(Math.random() * 26),
+          mobile: 46 + Math.floor(Math.random() * 24),
+        });
+      }
+    });
+  }
+
+  /* Kontaktformular an /api/contact anbinden */
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Wird gesendet ...';
+
+      const payload = {
+        name: contactForm.name.value,
+        email: contactForm.email.value,
+        message: contactForm.message.value,
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Fehler beim Senden.');
+        contactForm.reset();
+        document.getElementById('formSuccess').textContent = 'Danke! Wir melden uns in Kürze.';
+        document.getElementById('formSuccess').classList.remove('hidden');
+      } catch (err) {
+        document.getElementById('formSuccess').textContent = 'Senden fehlgeschlagen — bitte per E-Mail an hallo@ld-websites.at.';
+        document.getElementById('formSuccess').classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalLabel;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
