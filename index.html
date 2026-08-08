@@ -196,7 +196,8 @@
 
     <nav class="hidden md:flex items-center gap-9 text-sm text-ink-muted font-body">
       <a href="#leistungen" class="nav-link hover:text-ink transition-colors">Leistungen</a>
-      <a href="#portfolio" class="nav-link hover:text-ink transition-colors">Portfolio</a>
+      <a href="#portfolio" class="nav-link hover:text-ink transition-colors">Beispiele</a>
+      <a href="preise.html" class="nav-link hover:text-ink transition-colors">Preise</a>
       <a href="#team" class="nav-link hover:text-ink transition-colors">Team</a>
       <a href="#kontakt" class="nav-link hover:text-ink transition-colors">Kontakt</a>
     </nav>
@@ -214,7 +215,8 @@
   <div id="mobileMenu" class="hidden md:hidden border-t border-line bg-white/95 backdrop-blur-md">
     <div class="px-6 py-5 flex flex-col gap-4 text-ink-soft text-base">
       <a href="#leistungen" class="mobile-link">Leistungen</a>
-      <a href="#portfolio" class="mobile-link">Portfolio</a>
+      <a href="#portfolio" class="mobile-link">Beispiele</a>
+      <a href="preise.html" class="mobile-link">Preise</a>
       <a href="#team" class="mobile-link">Team</a>
       <a href="#kontakt" class="mobile-link">Kontakt</a>
       <a href="#kontakt" class="mt-2 text-center px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white font-medium">
@@ -404,86 +406,147 @@
   </div>
 </section>
 
-<!-- ============ PORTFOLIO ============ -->
+<!-- ============ PORTFOLIO / BEISPIELE ============ -->
 <section id="portfolio" class="relative py-24 md:py-32 px-6 border-t border-line">
   <div class="max-w-6xl mx-auto">
     <div class="reveal max-w-xl mb-16">
-      <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Portfolio</span>
+      <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Beispiele</span>
       <h2 class="font-display text-3xl md:text-4xl font-medium text-ink mt-4">
-        Ausgewählte Projekte
+        Echte Seiten, kein Mockup
       </h2>
+      <p class="mt-4 text-lg text-ink-muted leading-relaxed">
+        Vier Beispielprojekte für unterschiedliche Branchen — jede Vorschau ist die
+        echte, funktionierende Seite. Einmal anklicken und live durchklicken.
+      </p>
     </div>
 
+    <!-- Basic -->
+    <div class="reveal flex items-center gap-3 mb-6">
+      <span class="tag text-xs uppercase tracking-[0.15em] px-3 py-1.5 rounded-full bg-violet/10 text-violet-deep border border-violet/20">Paket Basic</span>
+      <span class="text-sm text-ink-muted">Klar, schnell, alles Wichtige an Bord</span>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-6 mb-16">
+
+      <a href="beispiele/schreinerei.html" target="_blank" rel="noopener"
+         class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block">
+        <div class="aspect-[16/10] bg-panel2 relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-8 bg-white/90 border-b border-line flex items-center gap-1.5 px-3 z-10">
+            <span class="w-2 h-2 rounded-full bg-zinc-300"></span>
+            <span class="w-2 h-2 rounded-full bg-zinc-300"></span>
+            <span class="w-2 h-2 rounded-full bg-zinc-300"></span>
+            <span class="ml-2 text-[10px] text-ink-muted/70 tag">holzwerk-bauer.at</span>
+          </div>
+          <iframe src="beispiele/schreinerei.html" title="Vorschau: Holzwerk Bauer" loading="lazy" tabindex="-1"
+                  class="absolute top-8 left-0 pointer-events-none border-0"
+                  style="width:400%; height:400%; transform:scale(0.25); transform-origin:0 0;"></iframe>
+          <div class="absolute inset-0 top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-lg text-ink">Holzwerk Bauer</h3>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
+          </div>
+          <div class="flex gap-2">
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Handwerk</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Basic</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="beispiele/coaching.html" target="_blank" rel="noopener"
+         class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.08s">
+        <div class="aspect-[16/10] bg-panel2 relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-8 bg-white/90 border-b border-line flex items-center gap-1.5 px-3 z-10">
+            <span class="w-2 h-2 rounded-full bg-zinc-300"></span>
+            <span class="w-2 h-2 rounded-full bg-zinc-300"></span>
+            <span class="w-2 h-2 rounded-full bg-zinc-300"></span>
+            <span class="ml-2 text-[10px] text-ink-muted/70 tag">klarheit-coaching.at</span>
+          </div>
+          <iframe src="beispiele/coaching.html" title="Vorschau: Klarheit Coaching" loading="lazy" tabindex="-1"
+                  class="absolute top-8 left-0 pointer-events-none border-0"
+                  style="width:400%; height:400%; transform:scale(0.25); transform-origin:0 0;"></iframe>
+          <div class="absolute inset-0 top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-lg text-ink">Klarheit Coaching</h3>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
+          </div>
+          <div class="flex gap-2">
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Coaching</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Basic</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Premium -->
+    <div class="reveal flex items-center gap-3 mb-6">
+      <span class="tag text-xs uppercase tracking-[0.15em] px-3 py-1.5 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white">Paket Premium</span>
+      <span class="text-sm text-ink-muted">Individuelle Animationen, eigener Look</span>
+    </div>
     <div class="grid sm:grid-cols-2 gap-6">
 
-      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block">
-        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
-          <i data-lucide="shopping-bag" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
+      <a href="beispiele/fotostudio.html" target="_blank" rel="noopener"
+         class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block">
+        <div class="aspect-[16/10] bg-[#0B0B0C] relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-8 bg-black/70 border-b border-white/10 flex items-center gap-1.5 px-3 z-10">
+            <span class="w-2 h-2 rounded-full bg-white/20"></span>
+            <span class="w-2 h-2 rounded-full bg-white/20"></span>
+            <span class="w-2 h-2 rounded-full bg-white/20"></span>
+            <span class="ml-2 text-[10px] text-white/50 tag">studio-blende.at</span>
+          </div>
+          <iframe src="beispiele/fotostudio.html" title="Vorschau: Studio Blende" loading="lazy" tabindex="-1"
+                  class="absolute top-8 left-0 pointer-events-none border-0"
+                  style="width:400%; height:400%; transform:scale(0.25); transform-origin:0 0;"></iframe>
+          <div class="absolute inset-0 top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/20 to-transparent"></div>
         </div>
         <div class="p-6">
           <div class="flex items-center justify-between mb-2">
-            <h3 class="font-display text-lg text-ink">Nordkorn Studio</h3>
+            <h3 class="font-display text-lg text-ink">Studio Blende</h3>
             <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
           </div>
           <div class="flex gap-2">
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">E-Commerce</span>
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Branding</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Fotografie</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-violet/30 text-violet-deep">Premium</span>
           </div>
         </div>
       </a>
 
-      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.08s">
-        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
-          <i data-lucide="building-2" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
+      <a href="beispiele/innenarchitektur.html" target="_blank" rel="noopener"
+         class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.08s">
+        <div class="aspect-[16/10] bg-[#101319] relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-8 bg-black/70 border-b border-white/10 flex items-center gap-1.5 px-3 z-10">
+            <span class="w-2 h-2 rounded-full bg-white/20"></span>
+            <span class="w-2 h-2 rounded-full bg-white/20"></span>
+            <span class="w-2 h-2 rounded-full bg-white/20"></span>
+            <span class="ml-2 text-[10px] text-white/50 tag">studio-nordlicht.at</span>
+          </div>
+          <iframe src="beispiele/innenarchitektur.html" title="Vorschau: Studio Nordlicht" loading="lazy" tabindex="-1"
+                  class="absolute top-8 left-0 pointer-events-none border-0"
+                  style="width:400%; height:400%; transform:scale(0.25); transform-origin:0 0;"></iframe>
+          <div class="absolute inset-0 top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/20 to-transparent"></div>
         </div>
         <div class="p-6">
           <div class="flex items-center justify-between mb-2">
-            <h3 class="font-display text-lg text-ink">Ferro & Bank</h3>
+            <h3 class="font-display text-lg text-ink">Studio Nordlicht</h3>
             <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
           </div>
           <div class="flex gap-2">
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Corporate</span>
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Redesign</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Innenarchitektur</span>
+            <span class="tag text-xs px-2.5 py-1 rounded-full border border-violet/30 text-violet-deep">Premium</span>
           </div>
         </div>
       </a>
 
-      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.16s">
-        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
-          <i data-lucide="utensils" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
-        </div>
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="font-display text-lg text-ink">Lumen Kitchen</h3>
-            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
-          </div>
-          <div class="flex gap-2">
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Gastronomie</span>
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">UI/UX</span>
-          </div>
-        </div>
-      </a>
+    </div>
 
-      <a href="#" class="reveal card-hover group rounded-2xl border border-line bg-panel overflow-hidden block" style="transition-delay:0.24s">
-        <div class="aspect-[16/10] bg-panel2 flex items-center justify-center relative overflow-hidden">
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet/10 to-transparent"></div>
-          <i data-lucide="stethoscope" class="w-8 h-8 text-zinc-300 group-hover:text-violet-deep transition-colors"></i>
-        </div>
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="font-display text-lg text-ink">Praxis Amsel</h3>
-            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:text-violet-deep transition-colors"></i>
-          </div>
-          <div class="flex gap-2">
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Healthcare</span>
-            <span class="tag text-xs px-2.5 py-1 rounded-full border border-line text-ink-muted">Webdesign</span>
-          </div>
-        </div>
+    <div class="reveal mt-12 text-center">
+      <a href="preise.html" class="glow-btn magnetic inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white">
+        Preise für Basic & Premium ansehen
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </a>
-
     </div>
   </div>
 </section>
@@ -616,6 +679,7 @@
     </div>
 
     <div class="flex items-center gap-6 text-sm text-ink-muted">
+      <a href="preise.html" class="hover:text-ink transition-colors">Preise</a>
       <a href="#" class="hover:text-ink transition-colors">Impressum</a>
       <a href="#" class="hover:text-ink transition-colors">Datenschutz</a>
     </div>

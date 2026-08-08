@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holzwerk Bauer — Schreinerei &amp; Möbelbau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2620;
+    --bg:#F6F3EC;
+    --panel:#EFEAE0;
+    --forest:#2F3E2E;
+    --forest-light:#3E5240;
+    --brass:#B8862B;
+    --line:rgba(43,38,32,0.14);
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px;}
+  section{padding:110px 0;}
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(246,243,236,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;}
+  .logo{font-family:'Fraunces',serif;font-size:20px;font-weight:600;display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:26px;height:26px;background:var(--forest);border-radius:1px;position:relative;flex:none;}
+  .logo-mark::after{content:"";position:absolute;inset:6px;border:1.5px solid var(--brass);}
+  .navlinks{display:flex;gap:36px;font-size:14px;font-weight:500;}
+  .navlinks a{opacity:0.75;transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--forest);color:var(--bg);padding:11px 22px;font-size:14px;font-weight:600;border-radius:var(--radius);
+  }
+  .burger{display:none;}
+
+  /* HERO */
+  .hero{
+    padding:190px 0 100px;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
+  }
+  .eyebrow{
+    font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--forest);font-weight:600;
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--brass);}
+  .hero h1{font-size:52px;line-height:1.08;margin-bottom:24px;}
+  .hero p{font-size:17px;max-width:440px;opacity:0.78;margin-bottom:34px;}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--forest);color:var(--bg);padding:15px 28px;font-weight:600;font-size:14.5px;border-radius:var(--radius);
+    transition:background .2s;
+  }
+  .btn-primary:hover{background:var(--forest-light);}
+  .btn-ghost{
+    padding:15px 24px;font-weight:600;font-size:14.5px;border:1px solid var(--line);border-radius:var(--radius);
+    transition:border-color .2s;
+  }
+  .btn-ghost:hover{border-color:var(--forest);}
+  .hero-art{
+    aspect-ratio:4/5;background:
+      repeating-linear-gradient(100deg, #3E2E1E 0 3px, #4A3826 3px 30px),
+      linear-gradient(160deg,var(--forest) 0%, #24301F 100%);
+    border-radius:2px;position:relative;overflow:hidden;
+  }
+  .hero-art::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(0deg, rgba(43,38,32,0.55), transparent 60%);
+  }
+  .hero-tag{
+    position:absolute;bottom:24px;left:24px;color:#F6F3EC;font-size:13px;
+    display:flex;flex-direction:column;gap:2px;
+  }
+  .hero-tag b{font-family:'Fraunces',serif;font-size:22px;font-weight:500;}
+
+  .trustbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;}
+  .trustbar .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;opacity:0.6;font-weight:600;}
+
+  /* SECTION HEAD */
+  .sec-head{max-width:560px;margin-bottom:56px;}
+  .sec-head .eyebrow{margin-bottom:14px;}
+  .sec-head h2{font-size:36px;}
+
+  /* LEISTUNGEN */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .service{background:var(--bg);padding:38px 30px;}
+  .service .num{font-family:'Fraunces',serif;font-size:14px;color:var(--brass);font-weight:600;margin-bottom:18px;}
+  .service h3{font-size:19px;margin-bottom:10px;}
+  .service p{font-size:14.5px;opacity:0.72;}
+
+  /* ABOUT */
+  .about{background:var(--panel);}
+  .about .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:center;}
+  .about-img{aspect-ratio:1/1;background:linear-gradient(150deg,#4A3826,#2B2620);border-radius:2px;}
+  .about h2{font-size:32px;margin-bottom:20px;}
+  .about p{opacity:0.78;margin-bottom:16px;font-size:15.5px;}
+  .stat-row{display:flex;gap:40px;margin-top:30px;}
+  .stat b{font-family:'Fraunces',serif;font-size:30px;display:block;color:var(--forest);}
+  .stat span{font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6;}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .testi{background:var(--panel);padding:32px;border-radius:2px;border-left:3px solid var(--brass);}
+  .testi p{font-size:15px;font-style:italic;margin-bottom:18px;opacity:0.85;}
+  .testi-who{font-size:13.5px;font-weight:600;}
+  .testi-who span{display:block;font-weight:400;opacity:0.6;font-size:12.5px;}
+
+  /* CONTACT */
+  .contact{background:var(--forest);color:var(--bg);}
+  .contact .wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;}
+  .contact h2{font-size:34px;color:var(--bg);margin-bottom:16px;}
+  .contact p{opacity:0.75;margin-bottom:28px;font-size:15px;}
+  .contact-item{display:flex;gap:14px;margin-bottom:16px;font-size:14.5px;}
+  .contact-item b{color:var(--brass);font-weight:600;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  input,textarea{
+    background:rgba(246,243,236,0.06);border:1px solid rgba(246,243,236,0.25);color:var(--bg);
+    padding:13px 15px;font-family:'Inter',sans-serif;font-size:14px;border-radius:2px;
+  }
+  input::placeholder,textarea::placeholder{color:rgba(246,243,236,0.45);}
+  textarea{resize:vertical;min-height:110px;}
+  .submit-btn{
+    background:var(--brass);color:#2B2620;padding:15px;font-weight:700;font-size:14.5px;border-radius:2px;border:none;cursor:pointer;
+    margin-top:4px;
+  }
+
+  footer{padding:36px 0;border-top:1px solid var(--line);}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;opacity:0.6;}
+  footer a{opacity:0.8;}
+  footer a:hover{opacity:1;text-decoration:underline;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .navlinks{display:none;}
+    .hero{grid-template-columns:1fr;padding-top:150px;}
+    .hero h1{font-size:38px;}
+    .about .wrap{grid-template-columns:1fr;}
+    .services{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    .contact .wrap{grid-template-columns:1fr;}
+    .row2{grid-template-columns:1fr;}
+    section{padding:70px 0;}
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html#portfolio" style="position:fixed;top:18px;left:18px;z-index:999;display:inline-flex;align-items:center;gap:6px;background:#2F3E2E;color:#F6F3EC;padding:9px 16px 9px 14px;border-radius:100px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;text-decoration:none;box-shadow:0 6px 18px rgba(43,38,32,0.22);">← LD Websites</a>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="logo-mark"></span>Holzwerk Bauer</div>
+    <div class="navlinks">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#referenzen">Referenzen</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <a href="#kontakt" class="nav-cta">Anfrage senden</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;">
+    <div>
+      <div class="eyebrow">Schreinerei · seit 2011</div>
+      <h1>Massivholzmöbel,<br>die Generationen<br>überdauern.</h1>
+      <p>Individueller Möbelbau, Einbauküchen und Restaurationen aus eigener Werkstatt in Graz. Von der Skizze bis zur Montage — alles aus einer Hand.</p>
+      <div class="btn-row">
+        <a href="#kontakt" class="btn-primary">Kostenlose Beratung</a>
+        <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-tag"><b>120+</b>Projekte realisiert</div>
+    </div>
+  </div>
+</section>
+
+<div class="trustbar">
+  <div class="wrap">
+    <span>Meisterbetrieb</span>
+    <span>Regional gefertigt</span>
+    <span>10 Jahre Garantie</span>
+    <span>Kostenlose Erstberatung</span>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Leistungen</div>
+      <h2>Was wir für Sie bauen</h2>
+    </div>
+    <div class="services reveal">
+      <div class="service">
+        <div class="num">01</div>
+        <h3>Einbauküchen</h3>
+        <p>Maßgefertigte Küchen nach Ihren Maßen, von der Planung bis zur Endmontage.</p>
+      </div>
+      <div class="service">
+        <div class="num">02</div>
+        <h3>Möbelbau</h3>
+        <p>Einzelstücke aus Massivholz — Tische, Regale, Schränke nach Wunsch.</p>
+      </div>
+      <div class="service">
+        <div class="num">03</div>
+        <h3>Restauration</h3>
+        <p>Antike und geerbte Möbelstücke fachgerecht aufgearbeitet und erhalten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="ueber-uns">
+  <div class="wrap">
+    <div class="about-img reveal"></div>
+    <div class="reveal">
+      <div class="eyebrow">Über uns</div>
+      <h2>Handwerk, dem man ansieht, dass es von Hand kommt.</h2>
+      <p>Ich bin Thomas Bauer, gelernter Tischlermeister. Seit über zehn Jahren fertige ich in meiner Werkstatt Möbelstücke, die nicht nach Katalog aussehen — sondern nach Ihnen.</p>
+      <p>Jedes Projekt beginnt mit einem Gespräch vor Ort. Kein Zwischenhändler, keine Massenware — nur ich, mein Team und das Holz.</p>
+      <div class="stat-row">
+        <div class="stat"><b>13</b><span>Jahre Erfahrung</span></div>
+        <div class="stat"><b>120+</b><span>Projekte</span></div>
+        <div class="stat"><b>4.9</b><span>Ø Bewertung</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="referenzen">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Referenzen</div>
+      <h2>Was Kunden sagen</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi">
+        <p>"Die Küche wurde exakt nach unseren Maßen gefertigt und die Beratung war ehrlich und unkompliziert. Absolute Empfehlung."</p>
+        <div class="testi-who">Familie Hofer<span>Einbauküche, Graz</span></div>
+      </div>
+      <div class="testi">
+        <p>"Unseren alten Esstisch von der Großmutter hat Herr Bauer wieder wie neu hergerichtet. Man merkt die Leidenschaft für das Handwerk."</p>
+        <div class="testi-who">Sabine K.<span>Restauration</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Lassen Sie uns sprechen.</h2>
+      <p>Schildern Sie uns Ihr Projekt — wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Angebot.</p>
+      <div class="contact-item"><b>Telefon</b> +43 316 123 456</div>
+      <div class="contact-item"><b>E-Mail</b> info@holzwerk-bauer.at</div>
+      <div class="contact-item"><b>Werkstatt</b> Musterstraße 14, 8010 Graz</div>
+    </div>
+    <form class="reveal">
+      <div class="row2">
+        <input type="text" placeholder="Ihr Name" required>
+        <input type="email" placeholder="E-Mail-Adresse" required>
+      </div>
+      <input type="text" placeholder="Betreff (z.B. Einbauküche)">
+      <textarea placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea>
+      <button type="submit" class="submit-btn">Anfrage senden</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Holzwerk Bauer · Tischlermeisterbetrieb</span>
+    <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a></span>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

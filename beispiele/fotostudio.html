@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Blende — Portraitfotografie für Unternehmer:innen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0C;
+    --bg2:#131315;
+    --ivory:#EDEAE4;
+    --muted:#8B8680;
+    --brass:#C9A24B;
+    --plum:#3A2430;
+    --line:rgba(237,234,228,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--ivory);font-family:'Inter',sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased;cursor:none;overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;cursor:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+  section{padding:150px 0;position:relative;}
+
+  /* custom cursor */
+  .cursor{
+    position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;background:var(--brass);
+    pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+    transition:width .25s,height .25s,background .25s,opacity .25s;
+    mix-blend-mode:difference;
+  }
+  .cursor.big{width:64px;height:64px;background:var(--ivory);}
+  @media(max-width:900px){.cursor{display:none;}body{cursor:auto;}a{cursor:pointer;}}
+
+  /* nav */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 0;transition:padding .3s,background .3s,border-color .3s;}
+  header.scrolled{padding:16px 0;background:rgba(11,11,12,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Fraunces',serif;font-style:italic;font-size:22px;font-weight:500;}
+  .navlinks{display:flex;gap:40px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;}
+  .navlinks a{opacity:0.65;transition:opacity .25s;position:relative;}
+  .navlinks a:hover{opacity:1;}
+  .nav-cta{border:1px solid var(--line);padding:11px 22px;font-size:12.5px;letter-spacing:0.04em;text-transform:uppercase;border-radius:100px;transition:border-color .25s,background .25s;}
+  .nav-cta:hover{border-color:var(--brass);background:rgba(201,162,75,0.08);}
+
+  /* hero */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px;}
+  .hero .eyebrow{font-size:12.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);margin-bottom:26px;
+    opacity:0;animation:rise .8s .1s forwards ease;}
+  .hero h1{font-size:clamp(46px,7vw,96px);line-height:0.98;font-weight:300;}
+  .hero h1 .line{display:block;overflow:hidden;}
+  .hero h1 .line span{display:block;transform:translateY(110%);animation:rise-in .9s forwards cubic-bezier(.22,1,.36,1);}
+  .hero h1 .line:nth-child(1) span{animation-delay:.15s;}
+  .hero h1 .line:nth-child(2) span{animation-delay:.28s;}
+  .hero h1 em{font-style:italic;color:var(--brass);}
+  @keyframes rise-in{to{transform:translateY(0);}}
+  @keyframes rise{to{opacity:1;}}
+  .hero-sub{display:flex;justify-content:space-between;align-items:flex-end;margin-top:56px;gap:40px;flex-wrap:wrap;
+    opacity:0;animation:rise 1s .6s forwards ease;}
+  .hero-sub p{max-width:380px;color:var(--muted);font-size:15.5px;}
+  .scroll-hint{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+  .scroll-line{width:1px;height:40px;background:var(--line);position:relative;overflow:hidden;}
+  .scroll-line::after{content:"";position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--brass);animation:scrolldown 1.8s infinite;}
+  @keyframes scrolldown{0%{top:-100%;}60%{top:100%;}100%{top:100%;}}
+
+  /* marquee */
+  .marquee-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:26px 0;}
+  .marquee{display:flex;gap:60px;width:max-content;animation:scroll 28s linear infinite;}
+  .marquee span{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:60px;}
+  .marquee span::after{content:"✦";color:var(--brass);font-style:normal;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* intro text */
+  .intro{text-align:center;}
+  .intro p.big{font-family:'Fraunces',serif;font-size:clamp(24px,3.4vw,38px);font-weight:400;line-height:1.5;max-width:900px;margin:0 auto;color:var(--ivory);}
+  .intro p.big em{font-style:italic;color:var(--brass);}
+
+  /* gallery */
+  .sec-label{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;gap:30px;flex-wrap:wrap;}
+  .sec-label .eyebrow{font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--brass);margin-bottom:14px;}
+  .sec-label h2{font-size:clamp(30px,4vw,48px);font-weight:300;}
+  .sec-label a{font-size:13px;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--brass);padding-bottom:4px;color:var(--brass);}
+
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .g-item{aspect-ratio:3/4;position:relative;overflow:hidden;background:linear-gradient(160deg,#2A2A2C,#141414);}
+  .g-item:nth-child(2){aspect-ratio:3/4;margin-top:60px;}
+  .g-item:nth-child(3n+1){background:linear-gradient(150deg,#332420,#141212);}
+  .g-item:nth-child(3n+2){background:linear-gradient(150deg,#26221c,#131110);}
+  .g-item .g-shade{position:absolute;inset:0;background:radial-gradient(circle at 60% 30%, rgba(201,162,75,0.18), transparent 60%);
+    filter:grayscale(1);transition:filter .6s ease,transform .6s ease;}
+  .g-item:hover .g-shade{filter:grayscale(0);transform:scale(1.06);}
+  .g-caption{position:absolute;bottom:0;left:0;right:0;padding:20px;display:flex;justify-content:space-between;font-size:12.5px;
+    text-transform:uppercase;letter-spacing:0.05em;color:var(--ivory);
+    background:linear-gradient(0deg, rgba(0,0,0,0.55), transparent);}
+
+  /* process */
+  .process{border-top:1px solid var(--line);}
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:60px;}
+  .p-step{background:var(--bg);padding:36px 26px;}
+  .p-step .pn{font-family:'Fraunces',serif;font-style:italic;color:var(--brass);font-size:15px;margin-bottom:20px;}
+  .p-step h3{font-size:18px;font-weight:400;margin-bottom:10px;}
+  .p-step p{font-size:13.5px;color:var(--muted);}
+
+  /* pricing */
+  .pricing-wide{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:60px;}
+  .pw{background:var(--bg2);padding:44px 32px;transition:background .3s;}
+  .pw:hover{background:var(--plum);}
+  .pw h3{font-size:20px;font-weight:400;margin-bottom:6px;}
+  .pw .pw-price{font-family:'Fraunces',serif;font-size:38px;font-weight:300;margin:18px 0;color:var(--brass);}
+  .pw ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--muted);margin-bottom:28px;}
+  .pw a{display:inline-block;font-size:12.5px;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--brass);padding-bottom:4px;color:var(--brass);}
+
+  /* cta */
+  .cta{text-align:center;}
+  .cta h2{font-size:clamp(34px,5.5vw,64px);font-weight:300;max-width:800px;margin:0 auto 36px;}
+  .cta h2 em{font-style:italic;color:var(--brass);}
+  .cta-btn{display:inline-flex;align-items:center;gap:14px;border:1px solid var(--brass);padding:18px 34px;border-radius:100px;
+    font-size:13.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--brass);transition:background .3s,color .3s;}
+  .cta-btn:hover{background:var(--brass);color:#0B0B0C;}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--muted);}
+  footer a:hover{color:var(--ivory);}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .navlinks{display:none;}
+    .gallery{grid-template-columns:1fr 1fr;}
+    .g-item:nth-child(2){margin-top:0;}
+    .process-grid{grid-template-columns:1fr 1fr;}
+    .pricing-wide{grid-template-columns:1fr;}
+    section{padding:90px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<a href="../index.html#portfolio" data-hover style="position:fixed;top:18px;left:18px;z-index:999;display:inline-flex;align-items:center;gap:6px;background:#C9A24B;color:#0B0B0C;padding:9px 16px 9px 14px;border-radius:100px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.35);">← LD Websites</a>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <div class="logo">Studio Blende</div>
+    <div class="navlinks">
+      <a href="#arbeiten" data-hover>Arbeiten</a>
+      <a href="#prozess" data-hover>Ablauf</a>
+      <a href="#preise" data-hover>Preise</a>
+    </div>
+    <a href="#kontakt" class="nav-cta" data-hover>Termin sichern</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Personal-Branding-Fotografie</div>
+    <h1>
+      <span class="line"><span>Bilder, die man</span></span>
+      <span class="line"><span><em>Ihnen glaubt.</em></span></span>
+    </h1>
+    <div class="hero-sub">
+      <p>Portraitfotografie für Unternehmer:innen, die online genauso überzeugen wollen wie persönlich. Wien &amp; deutschlandweit.</p>
+      <div class="scroll-hint">Scrollen<div class="scroll-line"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>Selbstständige Beraterinnen<span>Coaches &amp; Trainer</span><span>Anwaltskanzleien</span><span>Kreativstudios</span><span>Ärztinnen &amp; Therapeuten</span></span>
+    <span>Selbstständige Beraterinnen<span>Coaches &amp; Trainer</span><span>Anwaltskanzleien</span><span>Kreativstudios</span><span>Ärztinnen &amp; Therapeuten</span></span>
+  </div>
+</div>
+
+<section class="intro">
+  <div class="wrap reveal">
+    <p class="big">Die meisten Business-Fotos sehen aus wie <em>Passfotos mit Anzug</em>. Ich fotografiere Menschen so, wie sie wirklich auftreten — <em>präsent, glaubwürdig, unverwechselbar.</em></p>
+  </div>
+</section>
+
+<section id="arbeiten">
+  <div class="wrap">
+    <div class="sec-label reveal">
+      <div>
+        <div class="eyebrow">Ausgewählte Arbeiten</div>
+        <h2>Aktuelle Sessions</h2>
+      </div>
+      <a href="#" data-hover>Alle ansehen →</a>
+    </div>
+    <div class="gallery reveal">
+      <div class="g-item" data-hover><div class="g-shade"></div><div class="g-caption"><span>Nora K.</span><span>Steuerberatung</span></div></div>
+      <div class="g-item" data-hover><div class="g-shade"></div><div class="g-caption"><span>Studio Lehm</span><span>Keramikdesign</span></div></div>
+      <div class="g-item" data-hover><div class="g-shade"></div><div class="g-caption"><span>Markus F.</span><span>Coaching</span></div></div>
+      <div class="g-item" data-hover><div class="g-shade"></div><div class="g-caption"><span>Lena B.</span><span>Rechtsanwältin</span></div></div>
+      <div class="g-item" data-hover><div class="g-shade"></div><div class="g-caption"><span>Raum 21</span><span>Yogastudio</span></div></div>
+      <div class="g-item" data-hover><div class="g-shade"></div><div class="g-caption"><span>Jonas P.</span><span>Fotograf</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="prozess">
+  <div class="wrap">
+    <div class="sec-label reveal">
+      <div>
+        <div class="eyebrow">Ablauf</div>
+        <h2>So läuft Ihr Shooting</h2>
+      </div>
+    </div>
+    <div class="process-grid reveal">
+      <div class="p-step"><div class="pn">01</div><h3>Vorgespräch</h3><p>15 Minuten Call — wir klären Look, Einsatzort der Bilder und Location.</p></div>
+      <div class="p-step"><div class="pn">02</div><h3>Vorbereitung</h3><p>Sie erhalten ein kurzes Moodboard &amp; Styling-Tipps vorab.</p></div>
+      <div class="p-step"><div class="pn">03</div><h3>Shooting</h3><p>60–90 Minuten, entspannt, mit Anleitung — auch ohne Modelerfahrung.</p></div>
+      <div class="p-step"><div class="pn">04</div><h3>Auswahl</h3><p>Online-Galerie binnen 5 Tagen, feinbearbeitete Bilder in Ihrer Auswahl.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="preise">
+  <div class="wrap">
+    <div class="sec-label reveal">
+      <div>
+        <div class="eyebrow">Preise</div>
+        <h2>Pakete</h2>
+      </div>
+    </div>
+    <div class="pricing-wide reveal">
+      <div class="pw" data-hover>
+        <h3>Essenz</h3>
+        <div class="pw-price">450€</div>
+        <ul><li>60 Min. Shooting</li><li>1 Location</li><li>10 bearbeitete Bilder</li></ul>
+        <a href="#kontakt">Anfragen →</a>
+      </div>
+      <div class="pw" data-hover>
+        <h3>Signature</h3>
+        <div class="pw-price">780€</div>
+        <ul><li>90 Min. Shooting</li><li>2 Locations, 2 Outfits</li><li>20 bearbeitete Bilder</li></ul>
+        <a href="#kontakt">Anfragen →</a>
+      </div>
+      <div class="pw" data-hover>
+        <h3>Marke Komplett</h3>
+        <div class="pw-price">1.450€</div>
+        <ul><li>Halbtags-Shooting</li><li>Portraits + Content-Set</li><li>45 bearbeitete Bilder</li></ul>
+        <a href="#kontakt">Anfragen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="kontakt">
+  <div class="wrap reveal">
+    <h2>Bereit für Bilder, die <em>wirken?</em></h2>
+    <a href="#" class="cta-btn" data-hover>Termin anfragen ✦</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Studio Blende · Fotografie Wien</span>
+    <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a></span>
+  </div>
+</footer>
+
+<script>
+  // custom cursor
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e=>{
+    cursor.style.left = e.clientX+'px';
+    cursor.style.top = e.clientY+'px';
+  });
+  document.querySelectorAll('[data-hover]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cursor.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cursor.classList.remove('big'));
+  });
+
+  // header shrink
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // reveal on scroll
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
