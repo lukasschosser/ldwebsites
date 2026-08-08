@@ -67,14 +67,19 @@ export default async function handler(req, res) {
     const psiRes = await fetch(psiUrl);
     const psi = await psiRes.json();
 
-    performanceScore = Math.round((psi.lighthouseResult?.categories?.performance?.score ?? 0.5) * 100);
-    mobileScore = Math.round((psi.lighthouseResult?.categories?.seo?.score ?? 0.5) * 100);
-    signals = {
-      hasViewportMeta: psi.lighthouseResult?.audits?.viewport?.score === 1,
-      pageSizeKb: Math.round((psi.lighthouseResult?.audits?.['total-byte-weight']?.numericValue ?? 0) / 1024),
-    };
+    if (!psiRes.ok || psi.error) {
+      console.error('PageSpeed API Fehler:', psi.error?.message || psiRes.status);
+    } else {
+      performanceScore = Math.round((psi.lighthouseResult?.categories?.performance?.score ?? 0.5) * 100);
+      mobileScore = Math.round((psi.lighthouseResult?.categories?.seo?.score ?? 0.5) * 100);
+      signals = {
+        hasViewportMeta: psi.lighthouseResult?.audits?.viewport?.score === 1,
+        pageSizeKb: Math.round((psi.lighthouseResult?.audits?.['total-byte-weight']?.numericValue ?? 0) / 1024),
+      };
+    }
   } catch (err) {
-    // PageSpeed nicht erreichbar (z. B. Seite offline) — mit Fallback-Werten weitermachen
+    // PageSpeed nicht erreichbar (z. B. Seite offline, oder Function-Timeout) — mit Fallback-Werten weitermachen
+    console.error('PageSpeed Request fehlgeschlagen:', err.message);
   }
 
   // 4) Kurzer, gedeckelter KI-Call NUR für Design-Score + einen Satz Einschätzung
@@ -108,6 +113,7 @@ export default async function handler(req, res) {
     summary = parsed.summary ?? summary;
   } catch (err) {
     // KI nicht erreichbar oder Antwort nicht parsebar — Fallback-Werte bleiben stehen
+    console.error('Anthropic Request fehlgeschlagen:', err.message);
   }
 
   const result = { domain: cleanDomain, performanceScore, designScore, mobileScore, summary };
