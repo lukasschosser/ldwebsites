@@ -760,6 +760,7 @@
           mobile: data.mobileScore,
         });
       } catch (err) {
+        console.error('Website-Check fehlgeschlagen:', err);
         await minWait;
         // Fallback-Simulation, falls kein Backend erreichbar ist
         showResult(domain, {

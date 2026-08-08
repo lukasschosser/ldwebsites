@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/website-check.js": {
+      "maxDuration": 60
+    },
+    "api/contact.js": {
+      "maxDuration": 10
+    }
+  }
+}
