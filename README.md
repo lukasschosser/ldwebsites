@@ -8,12 +8,16 @@ als Signature-Feature und einem an Supabase angebundenen Kontaktformular.
 
 ```
 ld-websites/
-├── index.html               Die komplette Website (HTML + Tailwind CDN + Vanilla JS)
+├── index.html               Die Haupt-Landingpage (HTML + Tailwind CDN + Vanilla JS)
+├── preise.html              Preisseite
+├── beispiele/               Statische Demo-Seiten pro Branche (Coaching, Fotostudio, ...)
 ├── api/
 │   ├── website-check.js     Serverless Function: echter Website-Check
 │   └── contact.js           Serverless Function: Kontaktformular → Supabase
 ├── supabase-schema.sql      Tabellen für website_checks & contact_submissions
+├── vercel.json               Function-Konfiguration (Timeouts)
 ├── SETUP.md                 Ausführliche Schritt-für-Schritt-Anleitung
+├── CLAUDE.md                Projekt-Kontext für Claude Code (Konventionen, Workflow)
 ├── .env.example              Vorlage für benötigte Umgebungsvariablen
 ├── package.json
 └── .gitignore
@@ -45,6 +49,50 @@ ld-websites/
 4. Bei Vercel importieren, Environment Variables setzen, deployen
 
 Ausführliche Anleitung inkl. aller Keys und Kostenübersicht: siehe [`SETUP.md`](./SETUP.md).
+
+## Workflow: Branches, Deploys & Rollback
+
+**Wichtig:** Vercel deployed automatisch bei jedem Push. Ein Push auf `main` geht sofort live —
+es gibt keine separate Staging-Umgebung.
+
+### Änderungen machen
+
+1. Feature-Branch erstellen statt direkt auf `main` zu arbeiten:
+   ```bash
+   git checkout -b feature/kurze-beschreibung
+   ```
+2. Änderungen committen und pushen:
+   ```bash
+   git push -u origin feature/kurze-beschreibung
+   ```
+   → Vercel erstellt automatisch eine **Preview-Deployment-URL** für diesen Branch (im Vercel-Dashboard
+   unter „Deployments" sichtbar, oder als Kommentar im zugehörigen Pull Request). Damit lässt sich die
+   Änderung vor dem Go-live in Ruhe anschauen, ohne dass die Live-Website betroffen ist.
+3. Auf GitHub einen Pull Request gegen `main` öffnen, Preview prüfen, dann mergen.
+4. Erst der Merge nach `main` löst das Produktions-Deployment aus.
+
+### Falls nach einem Deploy etwas kaputt ist (Rollback)
+
+**Schnellster Weg — Vercel Instant Rollback (kein Git nötig):**
+Im Vercel-Dashboard unter „Deployments" auf eine vorherige, funktionierende Deployment gehen und
+„Promote to Production" klicken. Das ist sofort wirksam (wenige Sekunden), unabhängig vom Git-Stand.
+
+**Über Git — für einen sauberen Commit-Verlauf:**
+```bash
+# den fehlerhaften Commit rückgängig machen (erzeugt neuen Commit, überschreibt nichts)
+git revert <commit-hash>
+git push
+```
+Das triggert automatisch ein neues, korrektes Deployment auf Vercel.
+
+### Empfehlung
+
+Vor größeren Änderungen (z. B. Redesign, neue Section) einen Git-Tag auf dem letzten stabilen Stand
+setzen, damit es einen klaren Referenzpunkt gibt:
+```bash
+git tag stabil-2026-08-09
+git push origin stabil-2026-08-09
+```
 
 ## GitHub Push
 
