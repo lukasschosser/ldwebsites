@@ -46,9 +46,11 @@ arbeiten und erst nach Freigabe mergen. Details siehe „Workflow" in [README.md
 
 ## Lokal testen
 
-Da es keinen Build-Schritt gibt, reicht für reines HTML/CSS/JS ein einfacher lokaler Server
-(z. B. `npx serve .`) oder direktes Öffnen im Browser. Für die `/api`-Functions (Supabase, PageSpeed,
-Anthropic) wird `vercel dev` mit einer lokalen `.env`-Datei (siehe `.env.example`) benötigt.
+Da es keinen Build-Schritt gibt, reicht für reines HTML/CSS/JS ein einfacher lokaler Server.
+`.claude/launch.json` ist dafür bereits eingerichtet (`npx serve .` auf Port 5500) — im Claude-Code-
+Browser-Tool einfach `preview_start` mit dem Namen `static` aufrufen. Für die `/api`-Functions
+(Supabase, PageSpeed, Anthropic) wird zusätzlich `vercel dev` mit einer lokalen `.env`-Datei
+(siehe `.env.example`) benötigt, da der einfache Static-Server keine Serverless Functions ausführt.
 
 ## Rollback
 
