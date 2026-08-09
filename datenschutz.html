@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Datenschutz — LD Websites</title>
+<meta name="description" content="Datenschutzerklärung von LD Websites gemäß DSGVO." />
+<meta name="robots" content="noindex" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          base: '#FAFAF9',
+          panel: '#FFFFFF',
+          panel2: '#F4F4F5',
+          line: '#E4E4E7',
+          ink: { DEFAULT: '#18181B', soft: '#3F3F46', muted: '#52525B' },
+          violet: { DEFAULT: '#7C3AED', deep: '#6D28D9', soft: '#8B5CF6' },
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  html { background: #FAFAF9; }
+  body { font-family: 'Inter', sans-serif; background-color: #FAFAF9; color: #18181B; }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -4px; width: 0%; height: 2px;
+    background: #7C3AED; transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+  .legal p, .legal li { color: #3F3F46; line-height: 1.75; }
+  .legal ul { list-style: disc; padding-left: 1.4rem; margin: 0.75rem 0; }
+  .legal h2 { margin-top: 2.5rem; }
+  .legal h3 { margin-top: 1.5rem; font-weight: 600; color: #18181B; }
+  .legal a { color: #6D28D9; text-decoration: underline; text-underline-offset: 2px; }
+  .placeholder { background: #F5F3FF; border: 1px dashed #C4B5FD; color: #6D28D9; padding: 0.05em 0.4em; border-radius: 4px; font-size: 0.95em; }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/80 border-b border-line">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+    <a href="index.html" class="font-display text-lg tracking-tight text-ink flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-violet"></span>
+      LD Websites
+    </a>
+
+    <nav class="hidden md:flex items-center gap-9 text-sm text-ink-muted font-body">
+      <a href="index.html#leistungen" class="nav-link hover:text-ink transition-colors">Leistungen</a>
+      <a href="index.html#portfolio" class="nav-link hover:text-ink transition-colors">Beispiele</a>
+      <a href="preise.html" class="nav-link hover:text-ink transition-colors">Preise</a>
+      <a href="index.html#team" class="nav-link hover:text-ink transition-colors">Team</a>
+      <a href="index.html#kontakt" class="nav-link hover:text-ink transition-colors">Kontakt</a>
+    </nav>
+
+    <a href="index.html#kontakt"
+       class="glow-btn hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-soft to-violet-deep text-white">
+      Projekt starten
+    </a>
+
+    <button id="menuBtn" class="md:hidden text-ink" aria-label="Menü öffnen" aria-expanded="false">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden border-t border-line bg-white/95 backdrop-blur-md">
+    <div class="px-6 py-5 flex flex-col gap-4 text-ink-soft text-base">
+      <a href="index.html#leistungen">Leistungen</a>
+      <a href="index.html#portfolio">Beispiele</a>
+      <a href="preise.html">Preise</a>
+      <a href="index.html#team">Team</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INHALT ============ -->
+<main class="legal max-w-3xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32">
+  <span class="tag text-xs uppercase tracking-[0.2em] text-violet-deep">Rechtliches</span>
+  <h1 class="font-display text-3xl md:text-4xl font-medium text-ink mt-4 mb-10">Datenschutzerklärung</h1>
+
+  <!--
+    HINWEIS FÜR DEN BETREIBER (nicht für Website-Besucher sichtbar):
+    Diese Erklärung wurde aus dem tatsächlichen Code der Website abgeleitet
+    (Supabase, Vercel, Google Fonts, PageSpeed API, Anthropic API, optional Resend).
+    Vor dem Live-Gang bitte prüfen:
+      - Verantwortlicher-Platzhalter unten mit echten Kontaktdaten befüllen
+      - Supabase-Projektregion bestätigen (EU oder USA?) — beeinflusst den Text zu
+        internationalen Datenübermittlungen
+      - Diese Seite ist eine solide Grundlage, ersetzt aber keine anwaltliche Prüfung,
+        vor allem falls das Angebot wächst (z. B. Newsletter, Tracking, Ads dazukommen).
+  -->
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">1. Verantwortlicher</h2>
+    <p>
+      Verantwortlicher im Sinne der DSGVO für die Datenverarbeitung auf dieser Website:<br />
+      <span class="placeholder">Vor- und Nachname(n) / Firmenname</span><br />
+      <span class="placeholder">Straße, PLZ, Ort</span><br />
+      E-Mail: <a href="mailto:office@ldwebsites.at">office@ldwebsites.at</a>
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">2. Allgemeines</h2>
+    <p>
+      Wir nehmen den Schutz Ihrer personenbezogenen Daten ernst und verarbeiten sie ausschließlich
+      auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2021). Diese Website verwendet
+      <strong>keine Cookies</strong> und kein Tracking zu Marketing- oder Analysezwecken.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">3. Hosting</h2>
+    <p>
+      Diese Website wird bei <strong>Vercel Inc.</strong> (USA) gehostet. Beim Aufruf der Website
+      verarbeitet Vercel automatisch technische Verbindungsdaten (u. a. IP-Adresse, Datum und
+      Uhrzeit des Zugriffs, aufgerufene Seite, User-Agent) in Server-Logfiles. Dies dient der
+      technischen Bereitstellung, Stabilität und Sicherheit der Website. Eine Übermittlung an ein
+      Land außerhalb der EU/des EWR kann dabei stattfinden; wir setzen voraus, dass Vercel geeignete
+      Garantien (z. B. EU-Standardvertragsklauseln) für diesen Fall bereitstellt.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">4. Kontaktformular</h2>
+    <p>
+      Wenn Sie das Kontaktformular nutzen, verarbeiten wir die von Ihnen eingegebenen Daten
+      (Name, E-Mail-Adresse, Nachricht), um Ihre Anfrage zu beantworten. Rechtsgrundlage ist
+      Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Anfrage) bzw. lit. f DSGVO (berechtigtes
+      Interesse an der Bearbeitung von Anfragen).
+    </p>
+    <p>
+      Die Daten werden in einer Datenbank bei <strong>Supabase Inc.</strong> gespeichert.
+      Optional wird zusätzlich eine Benachrichtigungs-E-Mail über den Dienst
+      <strong>Resend</strong> versendet, damit wir zeitnah reagieren können.
+    </p>
+    <p>
+      Speicherdauer: Die Anfrage wird gespeichert, bis sie bearbeitet ist bzw. bis Sie eine
+      Löschung verlangen.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">5. Live-Website-Check</h2>
+    <p>
+      Wenn Sie unser Website-Check-Tool nutzen, übermitteln wir die von Ihnen eingegebene Domain
+      zur Analyse an folgende Dienste:
+    </p>
+    <ul>
+      <li><strong>Google PageSpeed Insights API</strong> (Google Ireland Ltd.) — für Performance- und SEO-Kennzahlen</li>
+      <li><strong>Anthropic</strong> (Claude Haiku) — für eine kurze automatisierte Design-Einschätzung, es werden nur Kennzahlen, nicht der Seiteninhalt übermittelt</li>
+    </ul>
+    <p>
+      Zur Missbrauchsprävention (Rate-Limiting) speichern wir Ihre IP-Adresse nicht im Klartext,
+      sondern ausschließlich als irreversiblen SHA-256-Hash, zusammen mit der geprüften Domain
+      und dem Ergebnis, in unserer Supabase-Datenbank. Ergebnisse pro Domain werden 7 Tage
+      zwischengespeichert (Caching), um wiederholte Anfragen zu vermeiden.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">6. Eingebundene externe Dienste</h2>
+    <p>Beim Aufruf dieser Website werden automatisch Verbindungen zu folgenden externen Anbietern aufgebaut, wodurch Ihre IP-Adresse an diese übermittelt wird:</p>
+    <ul>
+      <li><strong>Google Fonts</strong> (fonts.googleapis.com, fonts.gstatic.com) — zum Laden der Schriftarten „Space Grotesk“ und „Inter“</li>
+      <li><strong>Tailwind CSS</strong> (cdn.tailwindcss.com) — zum Laden des Stylesheets</li>
+      <li><strong>Lucide Icons</strong> (unpkg.com) — zum Laden der verwendeten Icons</li>
+    </ul>
+    <p>
+      Diese Anbieter können dabei eigene Server-Logfiles mit Ihrer IP-Adresse führen. Wir haben
+      hierauf keinen Einfluss. Weitere Informationen finden Sie in den Datenschutzhinweisen der
+      jeweiligen Anbieter.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">7. Ihre Rechte</h2>
+    <p>Sie haben jederzeit das Recht auf:</p>
+    <ul>
+      <li>Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)</li>
+      <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+      <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
+      <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+      <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+      <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+    </ul>
+    <p>
+      Wenden Sie sich dazu formlos an <a href="mailto:office@ldwebsites.at">office@ldwebsites.at</a>.
+      Außerdem haben Sie das Recht, sich bei der österreichischen Datenschutzbehörde zu beschweren:
+      <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">www.dsb.gv.at</a>.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">8. Sicherheit</h2>
+    <p>
+      Diese Website wird ausschließlich über eine verschlüsselte HTTPS-Verbindung ausgeliefert.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-display text-xl text-ink mb-3">9. Änderungen</h2>
+    <p>
+      Wir passen diese Datenschutzerklärung an, sobald sich unser Leistungsangebot oder die
+      rechtlichen Vorgaben ändern. Stand: <span id="stand"></span>.
+    </p>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-line px-6 py-10">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="font-display text-sm text-ink-muted">
+      © <span id="year"></span> LD Websites. Alle Rechte vorbehalten.
+    </div>
+    <div class="flex items-center gap-6 text-sm text-ink-muted">
+      <a href="preise.html" class="hover:text-ink transition-colors">Preise</a>
+      <a href="impressum.html" class="hover:text-ink transition-colors">Impressum</a>
+      <a href="datenschutz.html" class="hover:text-ink transition-colors">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('stand').textContent = new Date().toLocaleDateString('de-AT', { year: 'numeric', month: 'long' });
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+  });
+</script>
+
+</body>
+</html>
