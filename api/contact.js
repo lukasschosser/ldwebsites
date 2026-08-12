@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           // Absender-Domain muss bei Resend verifiziert sein (resend.com/domains),
           // sonst schlägt der Versand fehl.
-          from: 'LD Websites <office@ldwebsites.at>',
+          from: 'LD Websites <noreply@notifications.ldwebsites.at>',
           to: 'office@ldwebsites.at',
           subject: `Neue Anfrage von ${name}`,
           text: `${message}\n\nVon: ${name} (${email})`,
